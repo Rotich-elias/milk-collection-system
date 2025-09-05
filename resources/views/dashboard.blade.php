@@ -31,7 +31,7 @@
 
                     <a href="{{ route('farmers.index') }}" class="block p-4 bg-indigo-50 hover:bg-indigo-100 rounded-lg border border-indigo-200">
                         <h4 class="font-semibold text-indigo-800">Farmer Statements</h4>
-                        <p class="text-indigo-600 text-sm">View individual farmer statements</p>
+                        <p class="text-indigo-600 text-sm">View individual farmer statements (from farmers list)</p>
                     </a>
                 </div>
             </div>

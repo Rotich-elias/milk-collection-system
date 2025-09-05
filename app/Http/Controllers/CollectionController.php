@@ -45,32 +45,44 @@ class CollectionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(MilkCollection $collection)
     {
-        //
+        $collection->load('farmer');
+        return view('collections.show', compact('collection'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(MilkCollection $collection)
     {
-        //
+        $farmers = Farmer::all();
+        return view('collections.edit', compact('collection', 'farmers'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, MilkCollection $collection)
     {
-        //
+        $request->validate([
+            'farmer_id' => 'required|exists:farmers,id',
+            'date' => 'required|date',
+            'quantity' => 'required|numeric|min:0',
+        ]);
+
+        $collection->update($request->all());
+
+        return redirect()->route('collections.index')->with('success', 'Milk collection updated successfully!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(MilkCollection $collection)
     {
-        //
+        $collection->delete();
+
+        return redirect()->route('collections.index')->with('success', 'Milk collection deleted successfully!');
     }
 }

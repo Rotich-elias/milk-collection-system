@@ -8,6 +8,10 @@ class Advance extends Model
 {
     protected $fillable = ['farmer_id', 'date', 'amount'];
 
+    protected $casts = [
+        'date' => 'date',
+    ];
+
     public function farmer()
     {
         return $this->belongsTo(Farmer::class);
